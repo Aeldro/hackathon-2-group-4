@@ -27,7 +27,7 @@ const readCategory = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-}
+};
 
 const editCategory = (req, res) => {
   const category = req.body;
