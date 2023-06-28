@@ -1,11 +1,17 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Connection from "./pages/Connection";
 import "./reset.css";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <h1>coucou</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Connection />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
