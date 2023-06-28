@@ -45,7 +45,7 @@
 //       <div>
 //         <h2 className="title">Bienvenue</h2>
 //         <div className="connection">
-          
+
 //           <form onSubmit={handleSubmit}>
 //             <div className="identifiant">
 //               <label htmlFor="email">Identifiant</label>
