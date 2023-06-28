@@ -1,6 +1,15 @@
+const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
 const models = require("../models");
 
-const browse = (req, res) => {
+const hashingOptions = {
+  type: argon2.argon2id,
+  memoryCost: 2 ** 16,
+  timeCost: 5,
+  parallelism: 1,
+};
+
+const browseUsers = (req, res) => {
   models.user
     .findAll()
     .then(([rows]) => {
@@ -12,7 +21,7 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readUser = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.user
     .find(id)
@@ -29,11 +38,15 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const editUser = (req, res) => {
   const user = req.body;
+
+  // TODO validations (length, format...)
+
   user.id = parseInt(req.params.id, 10);
+
   models.user
-    .update(req.body)
+    .update(user)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -47,12 +60,15 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const addUser = (req, res) => {
   const user = req.body;
+
+  // TODO validations (length, format...)
+
   models.user
     .insert(user)
     .then(([result]) => {
-      res.location(`/users/${result.insertId}`).sendStatus(201);
+      res.location(`/items/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -60,16 +76,100 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
-  const id = parseInt(req.params.id, 10);
+const destroyUser = (req, res) => {
   models.user
-    .delete(id)
+    .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
         res.sendStatus(204);
       }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Auth
+
+const getUserByUsername = (req, res, next) => {
+  models.user
+    .findUserByUsername(req.body.username)
+    .then(([result]) => {
+      if (result.length) {
+        // eslint-disable-next-line prefer-destructuring
+        req.user = result[0];
+        next();
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
+const verifyPassword = (req, res) => {
+  argon2
+    .verify(req.user.hashed_password, req.body.password)
+    .then((valid) => {
+      if (valid) {
+        const payload = {
+          sub: req.user.id,
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        delete req.user.hashed_password;
+        res.send({ token, user: req.user }).status(200);
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
+const verifyUsernameForSubscription = (req, res, next) => {
+  models.user
+    .findUserByUsername(req.body.username)
+    .then(([result]) => {
+      if (!result.length) {
+        next();
+      } else {
+        res.sendStatus(403);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
+const hashPassword = (req, res, next) => {
+  argon2
+    .hash(req.body.password, hashingOptions)
+    .then((hashedPassword) => {
+      req.body.hashedPassword = hashedPassword;
+      delete req.body.password;
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const postUser = (req, res) => {
+  models.user
+    .createUser(req.body)
+    .then(() => {
+      res.status(201).send("L'utilisateur a bien été créé.");
     })
     .catch((err) => {
       console.error(err);
@@ -78,9 +178,14 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  read,
-  edit,
-  add,
-  destroy,
+  browseUsers,
+  readUser,
+  editUser,
+  addUser,
+  destroyUser,
+  getUserByUsername,
+  verifyPassword,
+  verifyUsernameForSubscription,
+  hashPassword,
+  postUser,
 };

@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const browse = (req, res) => {
+const browseStorages = (req, res) => {
   models.storage
     .findAll()
     .then(([rows]) => {
@@ -12,7 +12,7 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readStorage = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.storage
     .find(id)
@@ -29,7 +29,7 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const editStorage = (req, res) => {
   const storage = req.body;
   storage.id = parseInt(req.params.id, 10);
   models.storage
@@ -47,7 +47,7 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const addStorage = (req, res) => {
   const storage = req.body;
   models.storage
     .insert(storage)
@@ -60,7 +60,7 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
+const destroyStorage = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.storage
     .delete(id)
@@ -78,9 +78,9 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  read,
-  edit,
-  add,
-  destroy,
+  browseStorages,
+  readStorage,
+  editStorage,
+  addStorage,
+  destroyStorage,
 };

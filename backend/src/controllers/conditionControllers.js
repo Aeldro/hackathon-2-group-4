@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const browse = (req, res) => {
+const browseConditions = (req, res) => {
   models.condition
     .findAll()
     .then(([rows]) => {
@@ -12,7 +12,7 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readCondition = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.condition
     .find(id)
@@ -30,6 +30,6 @@ const read = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  read,
+  browseConditions,
+  readCondition,
 };

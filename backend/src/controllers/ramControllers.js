@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const browse = (req, res) => {
+const browseRams = (req, res) => {
   models.ram
     .findAll()
     .then(([rows]) => {
@@ -12,7 +12,7 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readRam = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.ram
     .find(id)
@@ -29,7 +29,7 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const editRam = (req, res) => {
   const ram = req.body;
   ram.id = parseInt(req.params.id, 10);
   models.ram
@@ -47,7 +47,7 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const addRam = (req, res) => {
   const ram = req.body;
   models.ram
     .insert(ram)
@@ -60,7 +60,7 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
+const destroyRam = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.ram
     .delete(id)
@@ -78,9 +78,9 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  read,
-  edit,
-  add,
-  destroy,
+  browseRams,
+  readRam,
+  editRam,
+  addRam,
+  destroyRam,
 };

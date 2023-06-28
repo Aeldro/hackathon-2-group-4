@@ -5,6 +5,20 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
+  findUserByUsername(user) {
+    return this.database.query(
+      `SELECT * FROM ${this.table} WHERE username = ?`,
+      [user]
+    );
+  }
+
+  createUser(user) {
+    return this.database.query(
+      `INSERT INTO ${this.table} SET username = ?, hashed_password = ?, is_admin = ?`,
+      [user.username, user.hashedPassword, user.isAdmin]
+    );
+  }
+
   insert(user) {
     const { username, password, isAdmin } = user;
     return this.database.query(
