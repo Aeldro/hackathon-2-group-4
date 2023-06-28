@@ -1,0 +1,15 @@
+:root {
+  --main-color: #272350;
+}
+
+body {
+  width: 100vw;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hide {
+  display: none;
+}
