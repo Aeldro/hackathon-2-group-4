@@ -5,7 +5,7 @@ CREATE TABLE item (
 
 INSERT INTO item (title) VALUES ('Stuff'), ('Doodads');
 
-----------------BDD hackathon----------------
+-- BDD hackathon
 
 DROP TABLE IF EXISTS `user`;
 
@@ -17,7 +17,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `user` VALUES (1,'johnsmith','password123',0),(2,'janedoe','securepass',1),(3,'mikejones','passw0rd!',0),(4,'sarahbrown','mypassword',0),(5,'adminuser','admin123',1);
+INSERT INTO `user` VALUES (1,'johnsmith','$argon2id$v=19$m=65536,t=5,p=1$+3bdLT88UpVMccSJhkcg0A$YV+K0DOmZ8KHvBqkGQbkFhH3EI6pug0/UFoWixPotxM',0),(2,'janedoe','$argon2id$v=19$m=65536,t=5,p=1$wK9jdP9+Vuf41hHk+tSZTA$MP6POnJAkFT7780+F2lIhDm3VX/P4261noMvmTVHGmg',1),(3,'mikejones','$argon2id$v=19$m=65536,t=5,p=1$CechHU96mOaHsg7T6STauA$xZ21752BOvcog48dmjmWv5JeyumKEUPsEWczYpwnY5g',0),(4,'sarahbrown','$argon2id$v=19$m=65536,t=5,p=1$6lu12UOLoFlaLRmzQ4L2yQ$NUpjYUKTmWWrjVJIEwodaAw6TzHrjV7MYF8SI25nwwY',0),(5,'adminuser','$argon2id$v=19$m=65536,t=5,p=1$jn0fhXIZfcPr/RLLpi50Xg$6IXhpHVr6Z+WgpaHidOBfFNnsrY7dGEH0T2jIp0K0nw',1);
 
 DROP TABLE IF EXISTS `antutu`;
 
