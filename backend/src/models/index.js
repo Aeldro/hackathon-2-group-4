@@ -34,6 +34,31 @@ const ItemManager = require("./ItemManager");
 models.item = new ItemManager();
 models.item.setDatabase(pool);
 
+const UserManager = require("./UserManager");
+
+models.user = new UserManager();
+models.user.setDatabase(pool);
+
+const CategoryManager = require("./CategoryManager");
+
+models.category = new CategoryManager();
+models.category.setDatabase(pool);
+
+const StorageManager = require("./StorageManager");
+
+models.storage = new StorageManager();
+models.storage.setDatabase(pool);
+
+const RamManager = require("./RamManager");
+
+models.ram = new RamManager();
+models.ram.setDatabase(pool);
+
+const ConditionManager = require("./ConditionManager");
+
+models.condition = new ConditionManager();
+models.condition.setDatabase(pool);
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
