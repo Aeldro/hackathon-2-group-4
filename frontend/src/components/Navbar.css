@@ -1,0 +1,85 @@
+nav {
+  border: red 1px solid;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--main-color);
+  position: sticky;
+  top: 0;
+}
+
+.logoContainer {
+  width: 40%;
+  max-width: 18rem;
+}
+
+.logo {
+  width: 100%;
+}
+
+.burger {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.burger span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 5rem;
+}
+
+.burger span:first-child {
+  transform: translateY(-0.3rem);
+}
+
+.burger span:last-child {
+  transform: translateY(0.3rem);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  background-color: var(--main-color);
+  transition: all 0.5s ease-in-out;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.showMenu {
+  left: 0;
+}
+
+.menu button {
+  display: flex;
+  justify-content: center;
+}
+
+.menu button:first-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu button:first-child img {
+  width: 2rem;
+  height: 1.7rem;
+}
+
+button a {
+  color: white;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
