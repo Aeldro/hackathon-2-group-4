@@ -5,9 +5,9 @@ CREATE TABLE item (
 
 INSERT INTO item (title) VALUES ('Stuff'), ('Doodads');
 
-----------------BDD hackathon----------------
+-- BDD hackathon
 
-DROP TABLE IF EXISTS `user`;
+-- DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -19,7 +19,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` VALUES (1,'johnsmith','password123',0),(2,'janedoe','securepass',1),(3,'mikejones','passw0rd!',0),(4,'sarahbrown','mypassword',0),(5,'adminuser','admin123',1);
 
-DROP TABLE IF EXISTS `antutu`;
+-- DROP TABLE IF EXISTS `antutu`;
 
 CREATE TABLE `antutu` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -29,7 +29,7 @@ CREATE TABLE `antutu` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `category`;
+-- DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -40,7 +40,7 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `condition`;
+-- DROP TABLE IF EXISTS `condition`;
 
 CREATE TABLE `condition` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -50,7 +50,7 @@ CREATE TABLE `condition` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `ram`;
+-- DROP TABLE IF EXISTS `ram`;
 
 CREATE TABLE `ram` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -59,7 +59,7 @@ CREATE TABLE `ram` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `storage`;
+-- DROP TABLE IF EXISTS `storage`;
 
 CREATE TABLE `storage` (
   `id` int NOT NULL AUTO_INCREMENT,
