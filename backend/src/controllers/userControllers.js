@@ -75,12 +75,12 @@ const destroy = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-}
+};
 
 module.exports = {
   browse,
   read,
   edit,
   add,
-  destroy
-}
+  destroy,
+};

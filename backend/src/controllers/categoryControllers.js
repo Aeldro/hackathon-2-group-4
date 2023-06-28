@@ -28,7 +28,7 @@ const edit = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-}
+};
 
 const add = (req, res) => {
   const category = req.body;
@@ -41,7 +41,7 @@ const add = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-}
+};
 
 const destroy = (req, res) => {
   const id = parseInt(req.params.id, 10);
@@ -58,11 +58,11 @@ const destroy = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-}
+};
 
 module.exports = {
   browse,
   edit,
   add,
-  destroy
-}
+  destroy,
+};

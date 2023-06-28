@@ -11,7 +11,7 @@ class UserManager extends AbstractManager {
       `insert into ${this.table} (username, password, isAdmin) values (?, ?, ?)`,
       [username, password, isAdmin]
     );
-  };
+  }
 
   update(user) {
     const { id, username, password, isAdmin } = user;
@@ -19,7 +19,7 @@ class UserManager extends AbstractManager {
       `update ${this.table} set username = ?, password = ?, isAdmin = ? where id = ?`,
       [username, password, isAdmin, id]
     );
-  };
-};
+  }
+}
 
 module.exports = UserManager;
