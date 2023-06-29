@@ -1,0 +1,75 @@
+.calc-manag-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calc-manag-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-bottom: 2em;
+}
+
+.calc-manag-title h1 {
+  padding-top: 2em;
+  padding-bottom: 1em;
+  font-size: 1.65em;
+  font-weight: bold;
+}
+
+.calc-manag-title p {
+  font-style: italic;
+  width: 90vw;
+  line-height: 1.35em;
+  font-size: small;
+}
+
+.accordion {
+  width: 90vw;
+}
+
+.accordion-header {
+  font-size: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.element p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 2em;
+}
+
+.element button p:last-child {
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em;
+}
+
+.add-button {
+  margin-top: 1em;
+  background-color: lightgrey;
+  color: #272350;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.add-button:hover {
+  background-color: #272350;
+  color: white;
+}

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Connection from "./pages/Connection";
+import CalculatorManagement from "./pages/CalculatorManagement";
 import "./reset.css";
 import "./App.css";
 
@@ -17,6 +18,10 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Connection />} />
+            <Route
+              path="/calculator-management"
+              element={<CalculatorManagement />}
+            />
           </Routes>
         </Router>
       </MenuContextProvider>
