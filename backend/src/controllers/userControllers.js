@@ -9,7 +9,7 @@ const hashingOptions = {
   parallelism: 1,
 };
 
-const browse = (req, res) => {
+const browseUsers = (req, res) => {
   models.user
     .findAll()
     .then(([rows]) => {
@@ -21,9 +21,10 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readUser = (req, res) => {
+  const id = parseInt(req.params.id, 10);
   models.user
-    .find(req.params.id)
+    .find(id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -37,7 +38,7 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const editUser = (req, res) => {
   const user = req.body;
 
   // TODO validations (length, format...)
@@ -59,7 +60,7 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const addUser = (req, res) => {
   const user = req.body;
 
   // TODO validations (length, format...)
@@ -75,7 +76,7 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
+const destroyUser = (req, res) => {
   models.user
     .delete(req.params.id)
     .then(([result]) => {
@@ -177,11 +178,11 @@ const postUser = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  read,
-  edit,
-  add,
-  destroy,
+  browseUsers,
+  readUser,
+  editUser,
+  addUser,
+  destroyUser,
   getUserByUsername,
   verifyPassword,
   verifyUsernameForSubscription,

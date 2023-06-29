@@ -1,41 +1,68 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-alert */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Connection.css";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
+import AuthContext from "../contexts/AuthContext";
 
-function LoginPage() {
-  const [email, setEmail] = useState("");
+function Connection() {
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
+
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleLoginChange = (e) => {
+    setLogin(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email === "votre@email.com" && password === "votreMotDePasse") {
-      setIsLoggedIn(true);
-      alert("Connexion réussie !");
-    } else {
-      setIsLoggedIn(false);
-      alert("Échec de la connexion. Veuillez vérifier vos informations.");
-    }
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
 
-    // Réinitialiser les champs après la soumission
-    setEmail("");
-    setPassword("");
+      const user = {
+        username: login,
+        password: password,
+      };
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
+        user
+      );
+
+      if (response.data.token) {
+        console.log(response.data.token);
+        setUser(response.data.token);
+        setIsLoggedIn(true);
+        navigate("/calculator");
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.error(error.message);
+      setErrorMessage(
+        "Échec de la connexion. Veuillez vérifier vos informations"
+      );
+    }
   };
 
   if (isLoggedIn) {
     return (
       <div>
-        <h2>Vous êtes connecté !</h2>
+        <h2 className="succes_message">Vous êtes connecté !</h2>
       </div>
     );
   }
@@ -47,32 +74,38 @@ function LoginPage() {
           <h2 className="connection_title ">Bienvenue</h2>
           <div className="connection_container">
             <Form className="">
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group>
                 <Form.Label>Identifiant</Form.Label>
                 <Form.Control
+                  id="login"
+                  name="identifiant"
                   type="text"
                   placeholder="Votre identifiant"
-                  value={email}
-                  onChange={handleEmailChange}
+                  value={login}
+                  onChange={handleLoginChange}
                   required
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group>
                 <Form.Label>Mot de passe</Form.Label>
                 <Form.Control
+                  id="password"
+                  name="password"
                   type="password"
                   placeholder="Votre mot de passe"
                   value={password}
                   onChange={handlePasswordChange}
                   required
                 />
+                {errorMessage && (
+                  <p className="error_message">{errorMessage}</p>
+                )}
               </Form.Group>
 
               <div className="d-flex justify-content-center">
                 <Button
                   className="connection_button"
-                  variant="primary"
                   type="submit"
                   onClick={handleSubmit}
                 >
@@ -87,4 +120,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Connection;
