@@ -177,6 +177,62 @@ const postUser = (req, res) => {
     });
 };
 
+const verifyToken = (req, res, next) => {
+  try {
+    const authorizationHeader = req.get("Authorization");
+
+    if (authorizationHeader == null) {
+      throw new Error("Authorization header is missing");
+    }
+
+    const [type, token] = authorizationHeader.split(" ");
+    if (type !== "Bearer") {
+      throw new Error("Authorization header has not the 'Bearer' type");
+    }
+    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
+
+const getUserByIdFromPayload = (req, res) => {
+  const { sub } = req.payload;
+
+  models.user
+    .find(sub)
+    .then(([users]) => {
+      if (users[0] !== null) {
+        res.status(200).json(users[0]);
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getAdminByIdFromPayload = (req, res) => {
+  const { sub } = req.payload;
+
+  models.user
+    .find(sub)
+    .then(([users]) => {
+      if (users[0] !== null && users[0].is_admin) {
+        res.status(200).json(users[0]);
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browseUsers,
   readUser,
@@ -188,4 +244,7 @@ module.exports = {
   verifyUsernameForSubscription,
   hashPassword,
   postUser,
+  verifyToken,
+  getUserByIdFromPayload,
+  getAdminByIdFromPayload,
 };

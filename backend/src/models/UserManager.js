@@ -22,7 +22,7 @@ class UserManager extends AbstractManager {
   insert(user) {
     const { username, password, isAdmin } = user;
     return this.database.query(
-      `insert into ${this.table} (username, password, isAdmin) values (?, ?, ?)`,
+      `insert into ${this.table} (username, password, is_admin) values (?, ?, ?)`,
       [username, password, isAdmin]
     );
   }
@@ -30,7 +30,7 @@ class UserManager extends AbstractManager {
   update(user) {
     const { id, username, password, isAdmin } = user;
     return this.database.query(
-      `update ${this.table} set username = ?, password = ?, isAdmin = ? where id = ?`,
+      `update ${this.table} set username = ?, password = ?, is_admin = ? where id = ?`,
       [username, password, isAdmin, id]
     );
   }
