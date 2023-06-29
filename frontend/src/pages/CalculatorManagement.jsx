@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-// import Form from "react-bootstrap/Form";
+import Form from "react-bootstrap/Form";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
@@ -117,28 +117,48 @@ function CalculatorManagement() {
   const handleShowEditCategory = () => setEditCategory(true);
   const handleCloseEditCategory = () => setEditCategory(false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const formJson = Object.fromEntries(formData.entries());
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/rams/`, formJson)
+      .then(() => {
+        // Updates status to indicate successful submission
+        // setShowSuccessMessageAdd(true); // Displays success message
+      })
+      .catch((error) => {
+        // Handle API request or response errors
+        console.error("Erreur lors de l'envoi des données :", error);
+      });
+  };
+
   return (
     <div className="calc-manag-page">
       {isAdmin ? (
-        <div>
+        <>
           <Modal show={addRam} onHide={handleCloseAddRam}>
             <Modal.Header closeButton>
               <Modal.Title>Ajouter une RAM</Modal.Title>
             </Modal.Header>
             <Modal.Body className="modalInputs">
-              <label htmlFor="">Nom</label>
-              <input type="text" placeholder="Exemple: 16 Go" />
-              <label htmlFor="">Prix</label>
-              <input type="number" placeholder="Prix en euros" />
+              <Form onSubmit={handleSubmit} encType="multipart/form-data">
+                <label htmlFor="">Nom</label>
+                <input type="text" placeholder="Exemple: 16 Go" />
+                <label htmlFor="">Prix</label>
+                <input type="number" placeholder="Prix en euros" />
+
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseAddRam}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleCloseAddRam}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Form>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseAddRam}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={handleCloseAddRam}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
           </Modal>
 
           <Modal show={editRam} onHide={handleCloseEditRam}>
@@ -466,7 +486,7 @@ function CalculatorManagement() {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-        </div>
+        </>
       ) : userToken ? (
         useNavigate("/calculator")
       ) : (
