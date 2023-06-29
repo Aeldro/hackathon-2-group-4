@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Routes } from "react-router-dom";
-
-// Imports CSS
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Connection from "./pages/Connection";
 import "./reset.css";
 import "./App.css";
 
@@ -16,7 +15,9 @@ function App() {
       <MenuContextProvider>
         <Router>
           <Navbar />
-          <Routes>{/* <Route path="/" element={<Connection />} /> */}</Routes>
+          <Routes>
+            <Route path="/" element={<Connection />} />
+          </Routes>
         </Router>
       </MenuContextProvider>
     </div>
