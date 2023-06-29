@@ -37,7 +37,7 @@ function Navbar() {
             <span />
             <span />
           </button>
-          <div className={`menu ${isMenuShow ? "showMenu" : null}`}>
+          <div className={`menu z-3 ${isMenuShow ? "showMenu" : null}`}>
             <button type="button" onClick={() => setIsMenuShow(false)}>
               <img src={close} alt="Croix de fermeture du menu" />
             </button>
