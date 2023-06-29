@@ -1,9 +1,8 @@
-/* eslint-disable import/no-useless-path-segments */
+/* eslint-disable no-alert */
 import React, { useState } from "react";
-import "../pages/Connection.css";
-// import Button from "react-bootstrap/Button";
-// import Form from "react-bootstrap/Form";
-// import Col from "react-bootstrap";
+import "./Connection.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -42,37 +41,50 @@ function LoginPage() {
   }
 
   return (
-    <>
-      <div className="header" />
-      <div>
-        <h2 className="title">Bienvenue</h2>
-        <div className="connection">
-          <form onSubmit={handleSubmit}>
-            <div className="identifiant">
-              <label htmlFor="text">Identifiant</label>
-              <input
-                type="text"
-                id="text"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
-            </div>
-            <div className="password">
-              <label htmlFor="password">Mot de passe</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-            </div>
-            <button type="submit">Connexion</button>
-          </form>
+    <div>
+      <div className="connection_header" />
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <div>
+          <h2 className="connection_title ">Bienvenue</h2>
+          <div className="connection_container">
+            <Form className="">
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Identifiant</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Votre identifiant"
+                  value={email}
+                  onChange={handleEmailChange}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Mot de passe</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Votre mot de passe"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                />
+              </Form.Group>
+
+              <div className="d-flex justify-content-center">
+                <Button
+                  className="connection_button"
+                  variant="primary"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Connexion
+                </Button>
+              </div>
+            </Form>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
