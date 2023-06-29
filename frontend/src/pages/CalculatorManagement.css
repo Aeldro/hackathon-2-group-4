@@ -63,13 +63,8 @@
 
 .add-button {
   margin-top: 1em;
-  background-color: lightgrey;
-  color: #272350;
-  border: none;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.add-button:hover {
   background-color: #272350;
   color: white;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
