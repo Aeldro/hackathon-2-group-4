@@ -204,7 +204,6 @@ const getUserByIdFromPayload = (req, res) => {
     .find(sub)
     .then(([users]) => {
       if (users[0] !== null) {
-        // console.log(users[0]);
         res.status(200).json(users[0]);
       } else {
         res.sendStatus(401);
@@ -223,7 +222,6 @@ const getAdminByIdFromPayload = (req, res) => {
     .find(sub)
     .then(([users]) => {
       if (users[0] !== null && users[0].is_admin) {
-        // console.log(users[0]);
         res.status(200).json(users[0]);
       } else {
         res.sendStatus(401);
