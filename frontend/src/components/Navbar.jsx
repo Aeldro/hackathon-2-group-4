@@ -83,7 +83,7 @@ function Navbar() {
               setIsMenuShow(false);
             }}
           >
-            <Link to="/connection">
+            <Link to="/">
               <img src={disconnect} alt="Icone de déconnection" />
               <p>&nbsp;Se déconnecter</p>
             </Link>
