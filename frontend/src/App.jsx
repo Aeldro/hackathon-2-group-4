@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 
 // Imports contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
+import Calculator from "./pages/CalculatorPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Connection />} />
+            <Route path="/home" element={<Calculator />} />
           </Routes>
         </Router>
       </MenuContextProvider>
