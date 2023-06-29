@@ -3,15 +3,24 @@ import Connection from "./pages/Connection";
 import "./reset.css";
 import "./App.css";
 
+// Imports components
+import Navbar from "./components/Navbar";
+
+// Imports contexts
+import { MenuContextProvider } from "./contexts/MenuContext";
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Connection />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <MenuContextProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Connection />} />
+          </Routes>
+        </Router>
+      </MenuContextProvider>
+    </div>
   );
 }
 
