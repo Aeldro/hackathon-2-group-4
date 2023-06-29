@@ -1,23 +1,71 @@
-/* eslint-disable no-alert */
-import React /* { useState, useEffect } */ from "react";
+import React, { useState, useEffect } from "react";
 import "./Calculator.css";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
 
 function Calculator() {
-  // const [getRam, setGetRam] = useState("");
+  const [getRam, setGetRam] = useState([]);
+  // const [getCategories, setGetCategories] = useState([]);
+  const [getStorages, setGetStorages] = useState([]);
+  const [getIntegrities, setGetIntegrities] = useState([]);
+  const [getNetworks, setGetNetworks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/ram`)
+      .then((response) => {
+        setGetRam(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  // router.get("/categories", browseCategories);
 
   // useEffect(() => {
-  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/ram`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(setGetRam(data));
+  //   axios
+  //     .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+  //     .then((response) => {
+  //       setGetCategories(response.data);
   //     })
   //     .catch((err) => {
   //       console.error(err);
   //     });
   // }, []);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/storages`)
+      .then((response) => {
+        setGetStorages(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/integrities`)
+      .then((response) => {
+        setGetIntegrities(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/networks`)
+      .then((response) => {
+        setGetNetworks(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return (
     <Card className="card-calculator">
       <Card.Body className="card-body-calculator">
@@ -25,44 +73,49 @@ function Calculator() {
         <br />
         <Form.Select aria-label="Type de RAM" size="sm">
           <option>Quel est le type de RAM?</option>
-          {/* {getRam.map((el) => {
-            return <option value={el.id}>{el.name}</option>;
-          })} */}
-          <option value="1">1 GO</option>
-          <option value="2">2 GO</option>
-          <option value="3">3 GO</option>
-          <option value="4">4 GO</option>
-          <option value="5">6 GO</option>
-          <option value="6">8 GO</option>
-          <option value="7">12 GO</option>
-          <option value="8">16 GO</option>
+          {getRam.map((el) => {
+            return (
+              <option key={el.id} value={el.id}>
+                {el.name}
+              </option>
+            );
+          })}
         </Form.Select>
         <br />
         <Form.Select aria-label="Capacité de stockage" size="sm">
           <option>Quelle est la capacité de stockage?</option>
-          <option value="1">16 GO</option>
-          <option value="2">32 GO</option>
-          <option value="3">64 GO</option>
-          <option value="4">128 GO</option>
-          <option value="5">256 GO</option>
-          <option value="6">512 GO</option>
-          <option value="7">1000 GO</option>
+          {getStorages.map((el) => {
+            return (
+              <option key={el.id} value={el.id}>
+                {el.name}
+              </option>
+            );
+          })}
         </Form.Select>
         <br />
         <Form.Select aria-label="Type de réseau" size="sm">
           <option>Quel est le type de Réseau?</option>
-          <option value="1">4G</option>
-          <option value="2">5G</option>
+          {getNetworks.map((el) => {
+            return (
+              <option key={el.id} value={el.id}>
+                {el.name}
+              </option>
+            );
+          })}
         </Form.Select>
         <br />
         <Form.Select aria-label="Etat du téléphone" size="sm">
           <option>Quel est l'etat du téléphone ?</option>
-          <option value="1">Bon état</option>
-          <option value="2">Très bon état</option>
-          <option value="3">Parfait état</option>
+          {getIntegrities.map((el) => {
+            return (
+              <option key={el.id} value={el.id}>
+                {el.name}
+              </option>
+            );
+          })}
         </Form.Select>
         <br />
-        <Button variant="outline-primary">Calculer</Button>
+        {/* <Button variant="outline-primary"onClick={}>Calculer</Button> */}
       </Card.Body>
     </Card>
   );
