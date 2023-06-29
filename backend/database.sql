@@ -21,7 +21,7 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` VALUES (1,' HC','Blue',0,9),(2,'C','Green',10,50),(3,'B','Yellow',51,90),(4,'A','Orange',91,150),(5,'Premium','Red',151,1000);
 
-CREATE TABLE `condition` (
+CREATE TABLE `integrity` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `condition` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `condition` VALUES (4,'Bon état',NULL,20),(5,'Très bon état',NULL,10),(6,'Parfait état',NULL,0);
+INSERT INTO `integrity` VALUES (4,'Bon état',NULL,20),(5,'Très bon état',NULL,10),(6,'Parfait état',NULL,0);
 
 CREATE TABLE `ram` (
   `id` int NOT NULL AUTO_INCREMENT,

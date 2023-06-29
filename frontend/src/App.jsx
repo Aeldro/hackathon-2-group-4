@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Connection from "./pages/Connection";
 import "./reset.css";
 import "./App.css";
@@ -9,18 +10,21 @@ import Navbar from "./components/Navbar";
 // Imports contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import Calculator from "./pages/CalculatorPage";
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
     <div className="App">
       <MenuContextProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Connection />} />
-            <Route path="/home" element={<Calculator />} />
-          </Routes>
-        </Router>
+        <AuthContextProvider>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Connection />} />
+              <Route path="/home" element={<Calculator />} />
+            </Routes>
+          </Router>
+        </AuthContextProvider>
       </MenuContextProvider>
     </div>
   );
