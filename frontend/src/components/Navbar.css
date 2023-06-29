@@ -83,3 +83,18 @@ button a {
   align-items: center;
   font-size: 1rem;
 }
+
+@media screen and (min-width: 768px) {
+  .menu {
+    position: initial;
+    flex-direction: row;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .menu button:first-child {
+    display: none;
+  }
+}

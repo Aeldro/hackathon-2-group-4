@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-alert */
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Connection.css";
@@ -14,12 +14,16 @@ import AuthContext from "../contexts/AuthContext";
 
 function Connection() {
   const navigate = useNavigate();
-  const { userToken, setUser } = useContext(AuthContext);
+  const { userToken, setUser, verifAdmin } = useContext(AuthContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    verifAdmin();
+  }, [userToken]);
 
   const handleLoginChange = (e) => {
     setLogin(e.target.value);
