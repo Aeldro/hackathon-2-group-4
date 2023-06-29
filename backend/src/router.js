@@ -44,6 +44,9 @@ const {
   verifyUsernameForSubscription,
   hashPassword,
   postUser,
+  verifyToken,
+  getUserByIdFromPayload,
+  getAdminByIdFromPayload,
 } = require("./controllers/userControllers");
 
 const {
@@ -60,6 +63,9 @@ router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
+router.get("/get-user", verifyToken, getUserByIdFromPayload);
+router.get("/get-admin", verifyToken, getAdminByIdFromPayload);
+
 router.get("/users", browseUsers);
 router.post("/login", getUserByUsername, verifyPassword);
 router.post("/register", verifyUsernameForSubscription, hashPassword, postUser);
@@ -69,11 +75,11 @@ router.put("/users/:id", editUser);
 router.post("/users", addUser);
 router.delete("/users/:id", destroyUser);
 
-router.get("/ram", browseRams);
-router.get("/ram/:id", readRam);
-router.put("/ram/:id", editRam);
-router.post("/ram", addRam);
-router.delete("/ram/:id", destroyRam);
+router.get("/rams", browseRams);
+router.get("/rams/:id", readRam);
+router.put("/rams/:id", editRam);
+router.post("/rams", addRam);
+router.delete("/rams/:id", destroyRam);
 
 router.get("/categories", browseCategories);
 router.get("/categories/:id", readCategory);

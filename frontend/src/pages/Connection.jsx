@@ -14,7 +14,7 @@ import AuthContext from "../contexts/AuthContext";
 
 function Connection() {
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { userToken, setUser } = useContext(AuthContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -44,7 +44,6 @@ function Connection() {
       );
 
       if (response.data.token) {
-        console.log(response.data.token);
         setUser(response.data.token);
         setIsLoggedIn(true);
         navigate("/calculator");
@@ -69,53 +68,57 @@ function Connection() {
 
   return (
     <div>
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <div>
-          <h2 className="connection_title ">Bienvenue</h2>
-          <div className="connection_container">
-            <Form className="">
-              <Form.Group>
-                <Form.Label>Identifiant</Form.Label>
-                <Form.Control
-                  id="login"
-                  name="identifiant"
-                  type="text"
-                  placeholder="Votre identifiant"
-                  value={login}
-                  onChange={handleLoginChange}
-                  required
-                />
-              </Form.Group>
+      {!userToken ? (
+        <div className="d-flex justify-content-center align-items-center dvh-100">
+          <div>
+            <h2 className="connection_title ">Bienvenue</h2>
+            <div className="connection_container">
+              <Form className="">
+                <Form.Group>
+                  <Form.Label>Identifiant</Form.Label>
+                  <Form.Control
+                    id="login"
+                    name="identifiant"
+                    type="text"
+                    placeholder="Votre identifiant"
+                    value={login}
+                    onChange={handleLoginChange}
+                    required
+                  />
+                </Form.Group>
 
-              <Form.Group>
-                <Form.Label>Mot de passe</Form.Label>
-                <Form.Control
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Votre mot de passe"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  required
-                />
-                {errorMessage && (
-                  <p className="error_message">{errorMessage}</p>
-                )}
-              </Form.Group>
+                <Form.Group>
+                  <Form.Label>Mot de passe</Form.Label>
+                  <Form.Control
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Votre mot de passe"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    required
+                  />
+                  {errorMessage && (
+                    <p className="error_message">{errorMessage}</p>
+                  )}
+                </Form.Group>
 
-              <div className="d-flex justify-content-center">
-                <Button
-                  className="connection_button"
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Connexion
-                </Button>
-              </div>
-            </Form>
+                <div className="d-flex justify-content-center">
+                  <Button
+                    className="connection_button"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    Connexion
+                  </Button>
+                </div>
+              </Form>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <p>Vous etes déjà connecté(e)</p>
+      )}
     </div>
   );
 }
