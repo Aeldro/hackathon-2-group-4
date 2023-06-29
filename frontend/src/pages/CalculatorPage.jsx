@@ -1,23 +1,23 @@
 /* eslint-disable no-alert */
-import React, { useState } from "react";
+import React /* { useState } */ from "react";
 import "./CalculatorPage.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 
 function Calculator() {
-  const [getRam, setGetRam] = useState("");
+  // const [getRam, setGetRam] = useState("");
 
-  useEffect(() => {
-    fetch("http://localhost:4000/accessories")
-      .then((response) => response.json())
-      .then((data) => {
-        setAccessories(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/accessories")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setAccessories(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, []);
   return (
     <Card className="card-calculator">
       <Card.Body className="card-body-calculator">
@@ -25,9 +25,9 @@ function Calculator() {
         <br />
         <Form.Select aria-label="Type de RAM" size="sm">
           <option>Quel est le type de RAM?</option>
-          {accessories.map((el) => {
-              return <option value={el.id}>{el.name}</option>;
-            })}
+          {/* {accessories.map((el) => {
+            return <option value={el.id}>{el.name}</option>;
+          })} */}
           <option value="1">1 GO</option>
           <option value="2">2 GO</option>
           <option value="3">3 GO</option>
