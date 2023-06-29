@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100dvw;
+  padding-inline: 10px;
 }
 .welcome {
   text-align: center;
   font-size: 2.4rem;
+  padding: 1rem;
 }
 .manageUser {
   display: flex;
@@ -21,7 +24,8 @@
 }
 
 .divider {
-  border-bottom: solid 0.5px;
+  border-bottom: solid 0.5px var(--secondary-color);
+  width: 95dvw;
 }
 .buttonUser {
   background-color: black;
@@ -30,9 +34,22 @@
   padding-inline: 1.5rem;
   padding-block: 0.8rem;
   box-shadow: 2px 2px 4px lightgray;
-  margin: 1rem;
+  margin-top: 2rem;
 }
 .buttonUser:hover {
   background-color: var(--main-color);
   box-shadow: 4px 4px 8px lightgrey;
+}
+
+.buttonSubmit {
+  background-color: var(--main-color);
+  color: #fff;
+  border-radius: 2rem;
+}
+.buttonSubmit:hover {
+  background-color: black;
+}
+.form-check-input:checked {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
 }
