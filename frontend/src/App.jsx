@@ -23,7 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Connection />} />
               <Route
-                path="/user-management"
+                path="/users-management"
                 element={<AdminUserManagement />}
               />
             </Routes>
