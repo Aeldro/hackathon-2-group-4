@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, { useContext /* { useState, useEffect } */ } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Calculator.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -19,7 +19,11 @@ function Calculator() {
   //       console.error(err);
   //     });
   // }, []);
-  const { userToken } = useContext(AuthContext);
+  const { userToken, verifAdmin } = useContext(AuthContext);
+
+  useEffect(() => {
+    verifAdmin();
+  }, [userToken]);
 
   return (
     <Card className="card-calculator">
