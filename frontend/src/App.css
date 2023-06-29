@@ -1,5 +1,6 @@
 :root {
   --main-color: #272350;
+  font-family: "Barlow", sans-serif;
 }
 
 body {
@@ -8,6 +9,7 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 .hide {

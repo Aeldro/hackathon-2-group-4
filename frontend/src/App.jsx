@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Connection from "./pages/Connection";
-import Admin from "./pages/Admin";
+import AdminUserManagement from "./pages/AdminUserManagement";
 
 import "./reset.css";
 import "./App.css";
@@ -19,7 +19,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Connection />} />
-            <Route path="/user-management" element={<Admin />} />
+            <Route path="/user-management" element={<AdminUserManagement />} />
           </Routes>
         </Router>
       </MenuContextProvider>
