@@ -42,7 +42,6 @@ function LoginPage() {
 
   return (
     <div>
-      <div className="connection_header" />
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div>
           <h2 className="connection_title ">Bienvenue</h2>
