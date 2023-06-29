@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
-import React /* { useState } */ from "react";
-import "./CalculatorPage.css";
+import React /* { useState, useEffect } */ from "react";
+import "./Calculator.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
@@ -9,10 +9,10 @@ function Calculator() {
   // const [getRam, setGetRam] = useState("");
 
   // useEffect(() => {
-  //   fetch("http://localhost:4000/accessories")
+  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/ram`)
   //     .then((response) => response.json())
   //     .then((data) => {
-  //       setAccessories(data);
+  //       console.log(setGetRam(data));
   //     })
   //     .catch((err) => {
   //       console.error(err);
@@ -25,7 +25,7 @@ function Calculator() {
         <br />
         <Form.Select aria-label="Type de RAM" size="sm">
           <option>Quel est le type de RAM?</option>
-          {/* {accessories.map((el) => {
+          {/* {getRam.map((el) => {
             return <option value={el.id}>{el.name}</option>;
           })} */}
           <option value="1">1 GO</option>
