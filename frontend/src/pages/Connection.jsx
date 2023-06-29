@@ -44,7 +44,6 @@ function Connection() {
       );
 
       if (response.data.token) {
-        console.log(response.data.token);
         setUser(response.data.token);
         setIsLoggedIn(true);
         navigate("/calculator");

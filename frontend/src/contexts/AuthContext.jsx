@@ -3,6 +3,7 @@
 import { createContext, useState, useMemo } from "react";
 import Cookies from "js-cookie";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -10,6 +11,8 @@ export default AuthContext;
 
 export function AuthContextProvider({ children }) {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const setUser = (token) => {
     if (token) {
       Cookies.set("userToken", token, {
@@ -22,8 +25,29 @@ export function AuthContextProvider({ children }) {
     }
   };
 
+  const verifAdmin = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/get-admin`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.is_admin) {
+          setIsAdmin(true);
+        }
+      });
+  };
+
   const AuthContextValue = useMemo(() => {
-    return { userToken, setUserToken, setUser };
+    return {
+      userToken,
+      setUserToken,
+      setUser,
+      isAdmin,
+      setIsAdmin,
+      verifAdmin,
+    };
   });
   return (
     <AuthContext.Provider value={AuthContextValue}>
