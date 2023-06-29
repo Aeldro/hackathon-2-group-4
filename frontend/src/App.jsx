@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Connection from "./pages/Connection";
 import AdminUserManagement from "./pages/AdminUserManagement";
 
+import CalculatorManagement from "./pages/CalculatorManagement";
 import "./reset.css";
 import "./App.css";
 
@@ -27,6 +28,10 @@ function App() {
               <Route
                 path="/users-management"
                 element={<AdminUserManagement />}
+              />
+              <Route
+                path="/calculator-management"
+                element={<CalculatorManagement />}
               />
             </Routes>
           </Router>
