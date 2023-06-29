@@ -6,17 +6,18 @@ class NetworkManager extends AbstractManager {
   }
 
   insert(network) {
-    const { name } = network;
-    return this.database.query(`insert into ${this.table} (name) values (?)`, [
-      name,
-    ]);
+    const { name, value } = network;
+    return this.database.query(
+      `insert into ${this.table} (name,value) values (?, ?)`,
+      [name, value]
+    );
   }
 
   update(network) {
-    const { id, name } = network;
+    const { id, name, value } = network;
     return this.database.query(
-      `update ${this.table} set name = ? where id = ?`,
-      [name, id]
+      `update ${this.table} set name = ?, value = ? where id = ?`,
+      [name, value, id]
     );
   }
 }

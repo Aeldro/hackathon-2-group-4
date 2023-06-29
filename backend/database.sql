@@ -52,7 +52,8 @@ INSERT INTO `storage` VALUES (1,'16 GO',10),(2,'32 GO',15),(3,'64 GO',20),(4,'12
 CREATE TABLE `network` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
+   `value` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `network` VALUES (1,'4G'),(2,'5G');
+INSERT INTO `network` VALUES (1,'4G',10),(2,'5G',15);

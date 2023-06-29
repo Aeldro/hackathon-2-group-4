@@ -6,6 +6,10 @@
   position: initial;
 }
 
+p{
+  
+}
+
 @media screen and (min-width: 768px) {
   .card-calculator {
     display: flex;
