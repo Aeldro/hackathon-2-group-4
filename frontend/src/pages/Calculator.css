@@ -1,9 +1,9 @@
 .card-calculator {
   display: flex;
   text-align: center;
-  margin: 25px auto;
+  margin: 90px auto;
   position: initial;
-  max-width: 60vw;
+  max-width: 80vw;
 }
 
 .button-calculate
@@ -13,6 +13,29 @@
 p {
   font-family:"Fira Sans";
   font-weight: bold;
+  font-size: 20px;
+  padding: 20px;
+}
+
+.p-price
+{
+  font-family:"Fira Sans";
+  font-weight: bold;
+  font-size: 30px;
+  padding: 20px;
+}
+h1{
+  font-weight:bold;
+  font-size: 40px;
+}
+.price-bubble {
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  color: #000;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
 }
 
 @media screen and (min-width: 768px) {

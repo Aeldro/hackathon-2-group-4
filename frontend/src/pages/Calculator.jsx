@@ -111,7 +111,7 @@ function Calculator() {
           <p>RAM </p>
           <Form.Select
             aria-label="Type de RAM"
-            size="sm"
+            size="lg"
             onChange={(e) => setRamValue(parseInt(e.target.value, 10))}
           >
             <option className="option-type">Quel est le type de RAM?</option>
@@ -126,7 +126,7 @@ function Calculator() {
           <p>Stockage </p>
           <Form.Select
             aria-label="Capacité de stockage"
-            size="sm"
+            size="lg"
             onChange={(e) => setStorageValue(parseInt(e.target.value, 10))}
           >
             <option>Quelle est la capacité de stockage?</option>
@@ -141,7 +141,7 @@ function Calculator() {
           <p>Réseau</p>
           <Form.Select
             aria-label="Type de réseau"
-            size="sm"
+            size="lg"
             onChange={(e) => setNetworkValue(parseInt(e.target.value, 10))}
           >
             <option>Quel est le type de Réseau?</option>
@@ -156,7 +156,7 @@ function Calculator() {
           <p>Etat </p>{" "}
           <Form.Select
             aria-label="Etat du téléphone"
-            size="sm"
+            size="lg"
             onChange={(e) => setIntegrityValue(parseInt(e.target.value, 10))}
           >
             <option>Quel est l'etat du téléphone ?</option>
@@ -173,14 +173,18 @@ function Calculator() {
             Calculer
           </Button>
           {finalPrice > 0 && (
-            <p>
+            <p className="p-price">
               Prix conseillé:{" "}
               {isPriceInRange() ? (
                 <span
-                  style={{ color: `${isColor().toLowerCase()}` }}
+                  // style={{ color: `${isColor().toLowerCase()}` }}
                   className={`color-${isPriceInRange().toLowerCase()}`}
                 >
-                  {finalPrice} ({isPriceInRange()})
+                  {finalPrice} € Catégorie({isPriceInRange()})
+                  <span
+                    className="price-bubble"
+                    style={{ backgroundColor: `${isColor().toLowerCase()}` }}
+                  />
                 </span>
               ) : (
                 finalPrice
