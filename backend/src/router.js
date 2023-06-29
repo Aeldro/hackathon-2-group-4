@@ -26,9 +26,12 @@ const {
 } = require("./controllers/storageControllers");
 
 const {
-  browseConditions,
-  readCondition,
-} = require("./controllers/conditionControllers");
+  browseIntegrities,
+  readIntegrity,
+  editIntegrity,
+  addIntegrity,
+  destroyIntegrity,
+} = require("./controllers/integrityControllers");
 
 const {
   browseUsers,
@@ -42,6 +45,14 @@ const {
   hashPassword,
   postUser,
 } = require("./controllers/userControllers");
+
+const {
+  browseNetworks,
+  readNetwork,
+  editNetwork,
+  addNetwork,
+  destroyNetwork,
+} = require("./controllers/networkControllers");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -70,13 +81,22 @@ router.put("/categories/:id", editCategory);
 router.post("/categories", addCategory);
 router.delete("/categories/:id", destroyCategory);
 
-router.get("/storage", browseStorages);
-router.get("/storage/:id", readStorage);
-router.put("/storage/:id", editStorage);
-router.post("/storage", addStorage);
-router.delete("/storage/:id", destroyStorage);
+router.get("/storages", browseStorages);
+router.get("/storages/:id", readStorage);
+router.put("/storages/:id", editStorage);
+router.post("/storages", addStorage);
+router.delete("/storages/:id", destroyStorage);
 
-router.get("/conditions", browseConditions);
-router.get("/conditions/:id", readCondition);
+router.get("/integrities", browseIntegrities);
+router.get("/integrities/:id", readIntegrity);
+router.put("/integrities/:id", editIntegrity);
+router.post("/integrities", addIntegrity);
+router.delete("/integrities/:id", destroyIntegrity);
+
+router.get("/networks", browseNetworks);
+router.get("/networks/:id", readNetwork);
+router.put("/networks/:id", editNetwork);
+router.post("/networks", addNetwork);
+router.delete("/networks/:id", destroyNetwork);
 
 module.exports = router;

@@ -54,10 +54,15 @@ const RamManager = require("./RamManager");
 models.ram = new RamManager();
 models.ram.setDatabase(pool);
 
-const ConditionManager = require("./ConditionManager");
+const IntegrityManager = require("./IntegrityManager");
 
-models.condition = new ConditionManager();
-models.condition.setDatabase(pool);
+models.integrity = new IntegrityManager();
+models.integrity.setDatabase(pool);
+
+const NetworkManager = require("./NetworkManager");
+
+models.network = new NetworkManager();
+models.network.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
