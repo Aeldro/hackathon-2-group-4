@@ -11,12 +11,12 @@
   align-items: center;
   justify-content: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding-bottom: 2em;
+  padding-bottom: 4.5em;
 }
 
 .calc-manag-title h1 {
   padding-top: 2em;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
   font-size: 1.65em;
   font-weight: bold;
 }
@@ -29,8 +29,8 @@
 }
 
 .accordion {
-  width: 90vw;
   position: initial;
+  margin-right: 0;
 }
 
 .accordion-item {
