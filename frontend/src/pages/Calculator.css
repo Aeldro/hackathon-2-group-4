@@ -1,21 +1,25 @@
 .card-calculator {
   display: flex;
   text-align: center;
-  /* max-width: 50vw; */
-  margin: 0 auto;
+  margin: 25px auto;
   position: initial;
+  max-width: 60vw;
 }
 
-p{
-  
+.button-calculate
+{background-color:var(--main-color);
+  border-color: var(--main-color);}
+
+p {
+  font-family:"Fira Sans";
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
   .card-calculator {
     display: flex;
     text-align: center;
-    max-width: 50vw;
-    margin: 0 auto;
-    /* align-items: center; */
+    max-width: 60vw;
+    margin: 25px auto;
   }
 }

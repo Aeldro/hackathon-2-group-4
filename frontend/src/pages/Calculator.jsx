@@ -81,11 +81,7 @@ function Calculator() {
 
   const handleCalculate = () => {
     const addition = networkValue + ramValue + storageValue;
-    if (integrityValue > 0) {
-      setFinalPrice(parseInt((addition * integrityValue) / 100, 10));
-    } else {
-      setFinalPrice(parseInt(addition, 10));
-    }
+    setFinalPrice(addition - (integrityValue / 100) * addition);
   };
 
   const isPriceInRange = () => {
@@ -118,7 +114,7 @@ function Calculator() {
             size="sm"
             onChange={(e) => setRamValue(parseInt(e.target.value, 10))}
           >
-            <option>Quel est le type de RAM?</option>
+            <option className="option-type">Quel est le type de RAM?</option>
             {getRam.map((el) => {
               return (
                 <option key={el.id} value={el.value}>
@@ -127,7 +123,6 @@ function Calculator() {
               );
             })}
           </Form.Select>
-          <br />
           <p>Stockage </p>
           <Form.Select
             aria-label="Capacité de stockage"
@@ -143,7 +138,6 @@ function Calculator() {
               );
             })}
           </Form.Select>
-          <br />
           <p>Réseau</p>
           <Form.Select
             aria-label="Type de réseau"
@@ -159,7 +153,6 @@ function Calculator() {
               );
             })}
           </Form.Select>
-          <br />
           <p>Etat </p>{" "}
           <Form.Select
             aria-label="Etat du téléphone"
@@ -176,11 +169,9 @@ function Calculator() {
             })}
           </Form.Select>
           <br />
-          <Button variant="outline-primary" onClick={handleCalculate}>
+          <Button onClick={handleCalculate} className="button-calculate">
             Calculer
           </Button>
-          {/* <p>Prix final: {finalPrice}</p>
-          <p></p> */}
           {finalPrice > 0 && (
             <p>
               Prix conseillé:{" "}
