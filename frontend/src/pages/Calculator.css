@@ -6,12 +6,13 @@
   max-width: 80vw;
 }
 
-.button-calculate
-{background-color:var(--main-color);
-  border-color: var(--main-color);}
+.button-calculate {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
 
 p {
-  font-family:"Fira Sans";
+  font-family: "Fira Sans";
   font-weight: bold;
   font-size: 20px;
   padding: 20px;
