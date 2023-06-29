@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 
 // Imports contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
+import Calculator from "./pages/Calculator";
 import { AuthContextProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Connection />} />
+              <Route path="/calculator" element={<Calculator />} />
               <Route
                 path="/users-management"
                 element={<AdminUserManagement />}

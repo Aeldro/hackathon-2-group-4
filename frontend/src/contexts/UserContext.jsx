@@ -21,7 +21,3 @@ export function UserContextProvider({ children }) {
 UserContextProvider.propTypes = {
   children: PropTypes.shape({}).isRequired,
 };
-// UserContextValue: {
-//     isAdmin: boolean;
-//     setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
-// }
