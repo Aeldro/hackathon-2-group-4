@@ -14,9 +14,11 @@ import disconnect from "../assets/icons/disconnect.svg";
 
 // Import contexts
 import MenuContext from "../contexts/MenuContext";
+import AuthContext from "../contexts/AuthContext";
 
 function Navbar() {
   const { isMenuShow, setIsMenuShow } = useContext(MenuContext);
+  const { userToken, setUser } = useContext(AuthContext);
 
   return (
     <nav>
@@ -72,16 +74,21 @@ function Navbar() {
             <p>&nbsp;Gestionnaire du calculateur</p>
           </Link>
         </button>
-        <button
-          type="button"
-          className="disconnectLink"
-          onClick={() => setIsMenuShow(false)}
-        >
-          <Link to="/connection">
-            <img src={disconnect} alt="Icone de déconnection" />
-            <p>&nbsp;Se déconnecter</p>
-          </Link>
-        </button>
+        {userToken ? (
+          <button
+            type="button"
+            className="disconnectLink"
+            onClick={() => {
+              setUser();
+              setIsMenuShow(false);
+            }}
+          >
+            <Link to="/connection">
+              <img src={disconnect} alt="Icone de déconnection" />
+              <p>&nbsp;Se déconnecter</p>
+            </Link>
+          </button>
+        ) : null}
       </div>
     </nav>
   );

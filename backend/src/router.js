@@ -46,6 +46,7 @@ const {
   postUser,
   verifyToken,
   getUserByIdFromPayload,
+  getAdminByIdFromPayload,
 } = require("./controllers/userControllers");
 
 const {
@@ -62,7 +63,8 @@ router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
-router.get("/get_user", verifyToken, getUserByIdFromPayload);
+router.get("/get-user", verifyToken, getUserByIdFromPayload);
+router.get("/get-admin", verifyToken, getAdminByIdFromPayload);
 
 router.get("/users", browseUsers);
 router.post("/login", getUserByUsername, verifyPassword);

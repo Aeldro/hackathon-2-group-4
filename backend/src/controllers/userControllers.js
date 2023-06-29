@@ -216,6 +216,25 @@ const getUserByIdFromPayload = (req, res) => {
     });
 };
 
+const getAdminByIdFromPayload = (req, res) => {
+  const { sub } = req.payload;
+
+  models.user
+    .find(sub)
+    .then(([users]) => {
+      if (users[0] !== null && users[0].is_admin) {
+        // console.log(users[0]);
+        res.status(200).json(users[0]);
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browseUsers,
   readUser,
@@ -229,4 +248,5 @@ module.exports = {
   postUser,
   verifyToken,
   getUserByIdFromPayload,
+  getAdminByIdFromPayload,
 };
