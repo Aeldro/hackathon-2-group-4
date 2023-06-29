@@ -1,7 +1,10 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-alert */
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Connection.css";
 
 import Button from "react-bootstrap/Button";
@@ -10,6 +13,7 @@ import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
 
 function Connection() {
+  const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   const [login, setLogin] = useState("");
@@ -31,7 +35,7 @@ function Connection() {
 
       const user = {
         username: login,
-        password,
+        password: password,
       };
 
       const response = await axios.post(
@@ -43,6 +47,7 @@ function Connection() {
         console.log(response.data.token);
         setUser(response.data.token);
         setIsLoggedIn(true);
+        navigate("/calculator");
       } else {
         setIsLoggedIn(false);
       }
