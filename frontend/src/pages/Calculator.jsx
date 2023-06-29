@@ -13,7 +13,7 @@ function Calculator() {
   const [getIntegrities, setGetIntegrities] = useState([]);
   const [getNetworks, setGetNetworks] = useState([]);
 
-  const { userToken } = useContext(AuthContext);
+  const { userToken, verifAdmin } = useContext(AuthContext);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
@@ -55,6 +55,10 @@ function Calculator() {
         console.error(err);
       });
   }, []);
+
+  useEffect(() => {
+    verifAdmin();
+  }, [userToken]);
 
   return (
     <Card className="card-calculator">

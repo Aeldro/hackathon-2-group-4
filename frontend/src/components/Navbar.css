@@ -55,6 +55,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  z-index: 1000;
 }
 
 .showMenu {
@@ -82,4 +83,19 @@ button a {
   display: flex;
   align-items: center;
   font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .menu {
+    position: initial;
+    flex-direction: row;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .menu button:first-child {
+    display: none;
+  }
 }
