@@ -1,17 +1,13 @@
-.connection_header {
-  background-color: #002743;
-  height: 10vh;
-}
-
 .connection_title {
   display: flex;
   font-family: Arial, Helvetica, sans-serif;
   color: #002743;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 2.4rem;
   align-items: center;
   justify-content: center;
   padding-bottom: 10%;
+  margin-top: 20%;
 }
 
 .connection_container {
@@ -33,6 +29,7 @@
   background-color: #002743;
   margin-top: 10%;
   font-family: Arial, Helvetica, sans-serif;
+  border: none;
 }
 
 .error_message {
