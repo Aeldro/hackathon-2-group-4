@@ -10,6 +10,8 @@ const {
   verifyUsernameForSubscription,
   hashPassword,
   postUser,
+  // verifyToken,
+  // deleteUser,
 } = require("./controllers/userControllers");
 const userControllers = require("./controllers/userControllers");
 
@@ -19,8 +21,11 @@ router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
+// router.get("/get_user", userControllers.verifyToken, );
+
 router.get("/users", userControllers.browse);
 router.post("/login", getUserByUsername, verifyPassword);
 router.post("/register", verifyUsernameForSubscription, hashPassword, postUser);
+// router.delete("/users/:id", deleteUser);
 
 module.exports = router;
