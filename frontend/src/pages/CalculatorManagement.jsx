@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-// import Form from "react-bootstrap/Form";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
@@ -200,7 +199,7 @@ function CalculatorManagement() {
   return (
     <div className="calc-manag-page">
       {isAdmin ? (
-        <div>
+        <>
           <Modal show={addRam} onHide={handleCloseAddRam}>
             <Modal.Header closeButton>
               <Modal.Title>Ajouter une RAM</Modal.Title>
@@ -553,7 +552,7 @@ function CalculatorManagement() {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-        </div>
+        </>
       ) : userToken ? (
         useNavigate("/calculator")
       ) : (
