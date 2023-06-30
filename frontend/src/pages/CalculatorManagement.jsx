@@ -117,6 +117,86 @@ function CalculatorManagement() {
   const handleShowEditCategory = () => setEditCategory(true);
   const handleCloseEditCategory = () => setEditCategory(false);
 
+  const [inputName, setInputName] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  const handleNameChange = (e) => {
+    setInputName(e.target.value);
+  };
+  const handleValueChange = (e) => {
+    setInputValue(e.target.value);
+  };
+  const handleSubmitAddRam = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/rams`, {
+        name: inputName,
+        value: inputValue,
+      })
+      .then(() => {
+        setAddRam(false);
+        setInputName("");
+        setInputValue("");
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
+          .then((response) => {
+            setGetRam(response.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  // Bouton édition d'une RAM -- NON FONCTIONNEL
+  const handleSubmitEditRam = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/rams/${getRam.id}`, {
+        name: inputName,
+        value: inputValue,
+      })
+      .then(() => {
+        setEditRam(false);
+        setInputName("");
+        setInputValue("");
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
+          .then((response) => {
+            setGetRam(response.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  //
+
+  // Bouton supprimer une RAM -- NON FONCTIONNEL
+  const deleteRam = (id) => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/rams/${id}`)
+      .then(() => {
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
+          .then((response) => {
+            setGetRam(response.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  //
+
   return (
     <div className="calc-manag-page">
       {isAdmin ? (
@@ -127,16 +207,26 @@ function CalculatorManagement() {
             </Modal.Header>
             <Modal.Body className="modalInputs">
               <label htmlFor="">Nom</label>
-              <input type="text" placeholder="Exemple: 16 Go" />
+              <input
+                type="text"
+                placeholder="Exemple: 16 Go"
+                value={inputName}
+                onChange={handleNameChange}
+              />
               <label htmlFor="">Prix</label>
-              <input type="number" placeholder="Prix en euros" />
+              <input
+                type="number"
+                placeholder="Prix en euros"
+                value={inputValue}
+                onChange={handleValueChange}
+              />
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseAddRam}>
-                Close
+                Annuler
               </Button>
-              <Button variant="primary" onClick={handleCloseAddRam}>
-                Save Changes
+              <Button variant="primary" onClick={handleSubmitAddRam}>
+                Valider
               </Button>
             </Modal.Footer>
           </Modal>
@@ -155,7 +245,7 @@ function CalculatorManagement() {
               <Button variant="secondary" onClick={handleCloseEditRam}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleCloseEditRam}>
+              <Button variant="primary" onClick={handleSubmitEditRam}>
                 Save Changes
               </Button>
             </Modal.Footer>
@@ -349,10 +439,7 @@ function CalculatorManagement() {
                       <button type="button" onClick={handleShowEditRam}>
                         <PencilFill size="1.25rem" />
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => console.info(item.name)}
-                      >
+                      <button type="button" onClick={deleteRam}>
                         <TrashFill color="red" size="1.25rem" />
                       </button>
                     </div>
