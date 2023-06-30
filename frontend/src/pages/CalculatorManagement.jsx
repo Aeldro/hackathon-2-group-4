@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import axios from "axios";
 import AuthContext from "../contexts/AuthContext";
@@ -117,22 +116,85 @@ function CalculatorManagement() {
   const handleShowEditCategory = () => setEditCategory(true);
   const handleCloseEditCategory = () => setEditCategory(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    const formJson = Object.fromEntries(formData.entries());
+  const [inputName, setInputName] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  const handleNameChange = (e) => {
+    setInputName(e.target.value);
+  };
+  const handleValueChange = (e) => {
+    setInputValue(e.target.value);
+  };
+  const handleSubmitAddRam = (e) => {
+    e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/rams/`, formJson)
-      .then(() => {
-        // Updates status to indicate successful submission
-        // setShowSuccessMessageAdd(true); // Displays success message
+      .post(`${import.meta.env.VITE_BACKEND_URL}/rams`, {
+        name: inputName,
+        value: inputValue,
       })
-      .catch((error) => {
-        // Handle API request or response errors
-        console.error("Erreur lors de l'envoi des données :", error);
+      .then(() => {
+        setAddRam(false);
+        setInputName("");
+        setInputValue("");
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
+          .then((response) => {
+            setGetRam(response.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
+  // Bouton édition d'une RAM -- NON FONCTIONNEL
+  const handleSubmitEditRam = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/rams/${getRam.id}`, {
+        name: inputName,
+        value: inputValue,
+      })
+      .then(() => {
+        setEditRam(false);
+        setInputName("");
+        setInputValue("");
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
+          .then((response) => {
+            setGetRam(response.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  //
+
+  // Bouton supprimer une RAM -- NON FONCTIONNEL
+  const deleteRam = (id) => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/rams/${id}`)
+      .then(() => {
+        axios
+          .get(`${import.meta.env.VITE_BACKEND_URL}/rams`)
+          .then((response) => {
+            setGetRam(response.data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  //
 
   return (
     <div className="calc-manag-page">
@@ -143,22 +205,29 @@ function CalculatorManagement() {
               <Modal.Title>Ajouter une RAM</Modal.Title>
             </Modal.Header>
             <Modal.Body className="modalInputs">
-              <Form onSubmit={handleSubmit} encType="multipart/form-data">
-                <label htmlFor="">Nom</label>
-                <input type="text" placeholder="Exemple: 16 Go" />
-                <label htmlFor="">Prix</label>
-                <input type="number" placeholder="Prix en euros" />
-
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleCloseAddRam}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleCloseAddRam}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
-              </Form>
+              <label htmlFor="">Nom</label>
+              <input
+                type="text"
+                placeholder="Exemple: 16 Go"
+                value={inputName}
+                onChange={handleNameChange}
+              />
+              <label htmlFor="">Prix</label>
+              <input
+                type="number"
+                placeholder="Prix en euros"
+                value={inputValue}
+                onChange={handleValueChange}
+              />
             </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseAddRam}>
+                Annuler
+              </Button>
+              <Button variant="primary" onClick={handleSubmitAddRam}>
+                Valider
+              </Button>
+            </Modal.Footer>
           </Modal>
 
           <Modal show={editRam} onHide={handleCloseEditRam}>
@@ -175,7 +244,7 @@ function CalculatorManagement() {
               <Button variant="secondary" onClick={handleCloseEditRam}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleCloseEditRam}>
+              <Button variant="primary" onClick={handleSubmitEditRam}>
                 Save Changes
               </Button>
             </Modal.Footer>
@@ -369,10 +438,7 @@ function CalculatorManagement() {
                       <button type="button" onClick={handleShowEditRam}>
                         <PencilFill size="1.25rem" />
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => console.info(item.name)}
-                      >
+                      <button type="button" onClick={deleteRam}>
                         <TrashFill color="red" size="1.25rem" />
                       </button>
                     </div>
