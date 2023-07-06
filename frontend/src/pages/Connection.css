@@ -1,0 +1,46 @@
+.connection_title {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #002743;
+  font-weight: 700;
+  font-size: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10%;
+  margin-top: 20%;
+}
+
+.connection_container {
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #002743;
+  font-size: 1.3rem;
+  border: 2px solid #002743;
+  border-radius: 10px;
+  padding: 10%;
+  min-width: 30vw;
+}
+
+.connection_container input {
+  margin: 5%;
+  color: #002743;
+}
+.connection_button {
+  background-color: #002743;
+  margin-top: 10%;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+}
+
+.error_message {
+  color: red;
+  font-size: 1rem;
+}
+.succes_message {
+  display: flex;
+  justify-content: center;
+  color: green;
+  font-size: 1.5rem;
+  align-items: center;
+  margin-top: 10%;
+}
